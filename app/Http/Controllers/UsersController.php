@@ -40,12 +40,11 @@ class UsersController extends Controller
         $user = new User();
         $user->name = $request->roles;
         $user->save();
-        var_export($request->roles);
-        $roles = $request->roles; //vì request->role là một array ->phải foreach array để lấy giá trị bên trong
+        //var_export($request->roles);
+        $roles = $request->roles; //vì request->role là một array -> phải foreach array để lấy giá trị bên trong
         foreach ($roles as $role){
-            $user->roles()->attach($role); //
+            $user->roles()->attach($role); //gán mỗi user với nhiều roles
         }
-
         return back()->with('thongbao','Adding user successful');
     }
 

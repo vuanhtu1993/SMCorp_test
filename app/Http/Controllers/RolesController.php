@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::all();
+        return view('roles.create',compact('permissions'));
     }
 
     /**
@@ -38,7 +40,11 @@ class RolesController extends Controller
         $role = new Role();
         $role->name = $request->name;
         $role->save();
-        //  echo $role->users()->getResults()->toJson(JSON_PRETTY_PRINT);die;
+        //var_export($request->permission);
+        $permissions = $request->permission;
+        foreach ($permissions as $permission){
+            $role->permissions()->attach($permission);
+        }
         return back()->with('thongbao','Adding role successful');
     }
 

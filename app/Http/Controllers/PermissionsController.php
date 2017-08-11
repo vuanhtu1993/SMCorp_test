@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use Illuminate\Http\Request;
 
-class PermisionsController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PermisionsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -24,7 +24,7 @@ class PermisionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('permissions.create');
     }
 
     /**
@@ -35,7 +35,10 @@ class PermisionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $permission = new Permission();
+        $permission->name = $request->name;
+        $permission->save();
+        return back()->with('thongbao','Adding Permission successful');
     }
 
     /**
