@@ -18,16 +18,15 @@
 
         <th>
             <?php
-//                foreach ($user->roles as $role){
-//                    foreach ($role->permissions as $permission){
-//                        echo $permission->name;
-//                        echo "<br>";
-//                    }
-//                }
-                $permissions = data_get($user,'roles.*.permissions.*.name');
-                echo implode('<br>',$permissions);
+                foreach ($user->roles as $role){
+                    foreach ($role->permissions as $permission){
+                        echo $permission->name;
+                        echo "<br>";
+                    }
+                }
             ?>
         </th>
     </tr>
     <?php }?>
 </table>
+
