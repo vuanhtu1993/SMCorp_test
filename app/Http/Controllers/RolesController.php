@@ -24,7 +24,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('roles.create');
     }
 
     /**
@@ -35,7 +35,11 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = new Role();
+        $role->name = $request->name;
+        $role->save();
+        //  echo $role->users()->getResults()->toJson(JSON_PRETTY_PRINT);die;
+        return back()->with('thongbao','Adding role successful');
     }
 
     /**

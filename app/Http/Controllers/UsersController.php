@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
+
 class UsersController extends Controller
 {
     /**
@@ -23,7 +25,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -34,7 +37,16 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->roles;
+        $user->save();
+        var_export($request->roles);
+        $roles = $request->roles; //vì request->role là một array ->phải foreach array để lấy giá trị bên trong
+        foreach ($roles as $role){
+            $user->roles()->attach($role); //
+        }
+
+        return back()->with('thongbao','Adding user successful');
     }
 
     /**
