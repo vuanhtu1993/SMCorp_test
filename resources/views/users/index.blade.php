@@ -7,6 +7,7 @@
         <th>User</th>
         <th>Roles</th>
         <th>Permissions</th>
+        <th>Permission_children</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -24,10 +25,25 @@
                 foreach ($user->roles as $role){
                     foreach ($role->permissions as $permission){
                         echo $permission->name;
+                        /** @var \App\Permission $permission */
+//                        foreach($permission->children as $childPermission){
+//                            echo $childPermission->name;
+//                            echo '<br>';
+//                        }
                         echo "<br>";
                     }
                 }
             ?>
+        </td>
+        <td>
+            <?php foreach ($user->roles as $role){
+                foreach ($role->permissions as $permission){
+                    foreach ($permission->children as $permission_children){
+                        echo $permission_children->name;
+                        echo "<br>";
+                    }
+                }
+            } ?>
         </td>
         <td><a href="{{route('users.edit',$user->id)}}">Edit</a></td>
         <td>
