@@ -72,8 +72,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('users.edit',compact('user'));
+        $roles = Role::all();
+        return view('users.edit',compact('user','roles'));
     }
 
     /**
@@ -85,7 +85,9 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo "Anh Tus";
+        foreach ($request->roles as $role){
+            echo $role;
+        }
     }
 
     /**
