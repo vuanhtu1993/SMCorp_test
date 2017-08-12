@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 use App\User;
@@ -70,7 +71,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -82,7 +84,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo "Anh Tus";
     }
 
     /**
@@ -93,6 +95,38 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return back()->with('message','Delete successful');
+    }
+
+    public function check()
+    {
+        $permissions  = Permission::all();
+        $users = User::all();
+        return view('layout.check',compact('users','permissions'));
+    }
+
+    public function get_check(Request $request)
+    {
+        $user = User::find($request->users);
+        //echo $user;
+        foreach ($user->roles as $role){
+            foreach ($role->permissions as $permission){
+                $check =  $permission->id;
+                if ($check == $request->permissions){
+                    return back()->with([
+                        'message'=>'User have this permission', //syntax gán giá trị trong mảng
+                        'selected_user'=>$request->users,
+                        'selected_permission'=>$request->permissions,
+                    ]);
+                }
+            }
+        }
+        return redirect()->back()->with([
+            'message'=>'User dont have this permission',
+            'selected_user'=>$request->users,
+            'selected_permission'=>$request->permissions,
+        ]);
     }
 }

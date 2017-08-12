@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('users/check','UsersController@check');
+Route::post('users/get_check','UsersController@get_check');
 Route::resource('users','UsersController');
 Route::resource('roles','RolesController');
 Route::resource('permissions','PermissionsController');
