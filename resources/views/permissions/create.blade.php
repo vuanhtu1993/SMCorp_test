@@ -5,5 +5,13 @@
     {{csrf_field()}}
     Add Permission
     <input type="text" name="name">
-    <button type="submit" >Create Permission</button>
+    <br>
+    Choose permission_children
+    <br>
+    @foreach($permissions as $permission)
+        <input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}
+        <br>
+    @endforeach
+
+    <button type="submit">Create Permission</button>
 </form>
