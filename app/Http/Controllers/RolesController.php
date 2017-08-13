@@ -16,7 +16,7 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('roles.index');
+        return view('roles.index',compact('roles'));
     }
 
     /**
@@ -68,7 +68,8 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return view('roles.edit',compact('role','permissions'));
     }
 
     /**
@@ -80,17 +81,24 @@ class RolesController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->name = $request->name;
+        $role->save;
+        $role->permissions()->sync($request->permissions);
+        return redirect('roles')->with('message','Editing Role successful');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function destroy(Role $role)
     {
-        //
+
+        $role->delete();
+        $role->save;
+
+        return redirect('roles')->with('message','Delete role successful');
     }
 }
