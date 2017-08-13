@@ -42,12 +42,14 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $user->name = $request->roles;
+        $user->name = $request->name;
         $user->save();
         //var_export($request->roles);
         $roles = $request->roles; // foreach array để lấy giá trị bên trong
-        foreach ($roles as $role) {
-            $user->roles()->attach($role); //gán mỗi user với nhiều roles
+        if ($roles) {
+            foreach ($roles as $role) {
+                $user->roles()->attach($role); //gán mỗi user với nhiều roles
+            }
         }
         return back()->with('thongbao', 'Adding user successful');
     }

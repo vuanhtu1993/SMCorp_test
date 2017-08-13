@@ -43,8 +43,10 @@ class RolesController extends Controller
         $role->save();
         //var_export($request->permission);
         $permissions = $request->permission;
-        foreach ($permissions as $permission){
-            $role->permissions()->attach($permission);
+        if ($permissions) {
+            foreach ($permissions as $permission) {
+                $role->permissions()->attach($permission);
+            }
         }
         return back()->with('thongbao','Adding role successful');
     }
