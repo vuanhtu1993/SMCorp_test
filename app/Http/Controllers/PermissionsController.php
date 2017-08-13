@@ -14,7 +14,8 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-
+        $permissions = Permission::all();
+        return view('permissions.index',compact('permissions'));
     }
 
     /**
@@ -40,10 +41,13 @@ class PermissionsController extends Controller
         $permission->name = $request->name;
         $permission->permission_id = '0';
         $permission->save();
-        foreach ($request->permission as $children_id) {
-            $child = Permission::find($children_id);
-            $child->permission_id = $permission->id;
-            $child->save();
+
+        if ($request->permission) {
+            foreach ($request->permission as $children_id) {
+                $child = Permission::find($children_id);
+                $child->permission_id = $permission->id;
+                $child->save();
+            }
         }
         return back()->with('thongbao', 'Adding Permission successful');
     }
@@ -67,7 +71,8 @@ class PermissionsController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        $permissions = Permission::all();
+        return view('permissions.edit',compact('permissions','permission'));
     }
 
     /**
@@ -79,17 +84,20 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $permission->name = $request->name;
+        $permission->save();
+        foreach ($request->permissions_child as $children_id){
+            $child = Permission::find($children_id);
+            $child->permission_id = $permission->id;
+            $child->save();
+        }
+        return redirect('permissions')->with('message','Editing permission successful');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Permission $permission
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect('permissions')->with('message','Delete permission successful');
     }
+
 }
