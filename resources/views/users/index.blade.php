@@ -57,4 +57,7 @@
     </tr>
     <?php }?>
 </table>
-<a href="users/check">Check permission</a>
+<a  href="{{route('users.create')}}">New User</a> <br>
+<a href="users/check">Check permission</a> <br>
+<a href="{{route('roles.index')}}">Roles page</a> <br>
+<a href="{{route('permissions.index')}}">Permissions page</a> <br>

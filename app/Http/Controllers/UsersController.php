@@ -92,7 +92,7 @@ class UsersController extends Controller
 //            echo $role;
 //        }
         $user->roles()->sync($request->roles); //delete all relationship alternative by new sync([array])
-        return redirect('users')->with('message','Editing user successfull');
+        return redirect('users')->with('message', 'Editing user successfull');
     }
 
     /**
@@ -117,17 +117,28 @@ class UsersController extends Controller
 
     public function get_check(Request $request)
     {
+        $idToCheck = $request->permissions;
         $user = User::find($request->users);
         //echo $user;
         foreach ($user->roles as $role) {
-            foreach ($role->permissions as $permission) {
-                $check = $permission->id;
-                if ($check == $request->permissions) {
+            /** @var Permission $each_permission */
+            foreach ($role->permissions as $each_permission) {
+                $each_permission_id = $each_permission->id;
+                if ($each_permission_id == $idToCheck) {
                     return back()->with([
                         'message' => 'User have this permission', //syntax gán giá trị trong mảng
                         'selected_user' => $request->users,
                         'selected_permission' => $request->permissions,
                     ]);
+                }
+                foreach($each_permission->children as $each_child_permission){
+                    if($each_child_permission->id == $idToCheck){
+                        return back()->with([
+                            'message' => 'User have this permission', //syntax gán giá trị trong mảng
+                            'selected_user' => $request->users,
+                            'selected_permission' => $request->permissions,
+                        ]);
+                    }
                 }
             }
         }

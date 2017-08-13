@@ -1,3 +1,5 @@
+<a href="{{route('users.index')}}">Home</a>
+<br>
 Check permission of User
 <br>
 <?php

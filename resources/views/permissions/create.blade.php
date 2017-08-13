@@ -1,3 +1,4 @@
+<a href="{{route('users.index')}}">Home</a>
 @if(session('thongbao'))
     {{session('thongbao')}}
 @endif
@@ -6,7 +7,7 @@
     Add Permission
     <input type="text" name="name">
     <br>
-    Choose permission_children
+    Choose permission_children for new permission
     <br>
     @foreach($permissions as $permission)
         <input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}

@@ -1,7 +1,10 @@
+<a href="{{route('users.index')}}">Home</a>
 <form action="{{route('roles.update',$role->id)}}" method="post">
     {{method_field('PUT')}}
     {{csrf_field()}}
     <input type="text" name="role" value="{{$role->name}}">
+    <br>
+    Add permissions for role
     <br>
     <?php /** @var \App\Role $role */
     /** @var \App\Permission $permissions */

@@ -1,3 +1,4 @@
+<a href="{{route('users.index')}}">Home</a>
 @if(session('thongbao'))
     {{session('thongbao')}}
     @endif
@@ -5,6 +6,8 @@
     {{csrf_field()}}
     Add Roles
     <input type="text" name="name"><br>
+    Add permissions for new role
+    <br>
     @foreach($permissions as $permission)
         <input type="checkbox" name="permission[]" value="{{$permission->id}}">{{$permission->name}}<br>
         @endforeach

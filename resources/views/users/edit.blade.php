@@ -1,4 +1,4 @@
-
+<a href="{{route('users.index')}}">Home</a>
 <form action="{{route('users.update',$user->id)}}" method="post">
     {{csrf_field()}}
     {{method_field('PUT')}}

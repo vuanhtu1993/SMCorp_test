@@ -28,3 +28,4 @@
     </tr>
     <?php } ?>
 </table>
+<a href="{{route('permissions.create')}}">New permission</a>

@@ -1,3 +1,4 @@
+<a href="{{route('users.index')}}">Home</a>
 @if(session('thongbao'))
     {{session('thongbao')}}
 @endif
@@ -5,6 +6,8 @@
     {{csrf_field()}}
     Add users
     <input type="text" name="name"><br>
+    Add roles for new User
+    <br>
     @foreach($roles as $role)
         <input type="checkbox" name="roles[{{$role->id}}]" value="{{$role->id}}">{{$role->name}}<br>
         {{--muốn truyền nhiều id lên controller thì name="roles[id]" value="..."

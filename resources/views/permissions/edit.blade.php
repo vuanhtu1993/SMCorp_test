@@ -1,7 +1,10 @@
+<a href="{{route('users.index')}}">Home</a>
 <form action="{{route('permissions.update',$permission->id)}}" method="post">
     {{csrf_field()}}
     {{method_field('PUT')}}
     <input type="text" name="name" value="{{$permission->name}}">
+    <br>
+    Permission_children
     <br>
     <?php /** @var array $permissions */
     /** @var \App\Permission $each_permission_to_check_is_child */

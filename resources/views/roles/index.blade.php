@@ -34,3 +34,4 @@
     </tr>
     <?php } ?>
 </table>
+<a href="{{route('roles.create')}}">New roles</a>
