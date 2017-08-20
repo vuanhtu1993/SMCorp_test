@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('users');
+    return view('layout.index');
 });
 Route::get('users/check','UsersController@check');
 Route::post('users/get_check','UsersController@get_check');

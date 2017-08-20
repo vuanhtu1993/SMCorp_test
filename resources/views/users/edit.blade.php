@@ -1,4 +1,6 @@
-<a href="{{route('users.index')}}">Home</a>
+@extends('layout.index')
+@section('content')
+
 <form action="{{route('users.update',$user->id)}}" method="post">
     {{csrf_field()}}
     {{method_field('PUT')}}
@@ -18,3 +20,4 @@
     @endforeach
     <button type="submit">Change User</button>
 </form>
+    @endsection

@@ -1,8 +1,10 @@
+@extends('layout.index')
+@section('content')
 <?php if (session('message')){
     echo session('message');
 }
     ?>
-<table>
+<table class="table">
     <tr>
         <th>User</th>
         <th>Roles</th>
@@ -61,3 +63,4 @@
 <a href="users/check">Check permission</a> <br>
 <a href="{{route('roles.index')}}">Roles page</a> <br>
 <a href="{{route('permissions.index')}}">Permissions page</a> <br>
+@endsection

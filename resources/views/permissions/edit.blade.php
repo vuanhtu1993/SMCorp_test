@@ -1,4 +1,5 @@
-<a href="{{route('users.index')}}">Home</a>
+@extends('layout.index')
+@section('content')
 <form action="{{route('permissions.update',$permission->id)}}" method="post">
     {{csrf_field()}}
     {{method_field('PUT')}}
@@ -29,3 +30,4 @@
     } ?>
     <button type="submit">Edit permission</button>
 </form>
+    @endsection

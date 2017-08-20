@@ -1,7 +1,9 @@
+@extends('layout.index')
+@section('content')
 <?php if(session('message'))
     echo session('message');
     ?>
-<table>
+<table class="table">
     <tr>
         <th>Role name</th>
         <th>Permissions</th>
@@ -35,3 +37,4 @@
     <?php } ?>
 </table>
 <a href="{{route('roles.create')}}">New roles</a>
+    @endsection

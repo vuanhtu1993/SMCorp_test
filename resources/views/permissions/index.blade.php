@@ -1,8 +1,10 @@
+@extends('layout.index')
+@section('content')
 <?php if (session('message')){
     echo session('message');
 }
  ?>
-<table>
+<table class="table">
     <tr>
         <th>Permission</th>
         <th>Permission_chil</th>
@@ -29,3 +31,4 @@
     <?php } ?>
 </table>
 <a href="{{route('permissions.create')}}">New permission</a>
+    @endsection

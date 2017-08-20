@@ -1,4 +1,6 @@
-<a href="{{route('users.index')}}">Home</a>
+@extends('layout.index')
+@section('content')
+
 <form action="{{route('roles.update',$role->id)}}" method="post">
     {{method_field('PUT')}}
     {{csrf_field()}}
@@ -22,3 +24,4 @@
     <?php } ?>
     <button TYPE="submit">Edit Roles</button>
 </form>
+    @endsection

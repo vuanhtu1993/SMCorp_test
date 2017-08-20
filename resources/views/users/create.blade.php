@@ -1,4 +1,6 @@
-<a href="{{route('users.index')}}">Home</a>
+@extends('layout.index')
+@section('content')
+
 @if(session('thongbao'))
     {{session('thongbao')}}
 @endif
@@ -16,3 +18,4 @@
     <button type="submit" >Create User</button>
 
 </form>
+    @endsection

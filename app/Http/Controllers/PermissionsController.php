@@ -86,10 +86,12 @@ class PermissionsController extends Controller
     {
         $permission->name = $request->name;
         $permission->save();
-        foreach ($request->permissions_child as $children_id){
-            $child = Permission::find($children_id);
-            $child->permission_id = $permission->id;
-            $child->save();
+        if ($request->permissions_child) {
+            foreach ($request->permissions_child as $children_id) {
+                $child = Permission::find($children_id);
+                $child->permission_id = $permission->id;
+                $child->save();
+            }
         }
         return redirect('permissions')->with('message','Editing permission successful');
     }
